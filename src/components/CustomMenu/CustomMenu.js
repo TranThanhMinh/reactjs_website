@@ -17,19 +17,27 @@ const CustomMenu = () => {
         navigate('/')
     }
 
+    const gotoCart = () => {
+        navigate('cart/')
+    }
+
     return (
         <div className='header row'>
-            <div className='col-sm-12 col-md-6 col-lg-6' style={{ justifyContent: 'space-between', display: 'flex', alignItems: 'center' }}>
-                <img src={require('../../assets/images/ic_shop.png')} className='img-shop' />
-                <div style={{ justifyItems: 'end', display: 'flex', alignItems: 'center' }}>
-                    <input placeholder='tim kiem san pham' className='input-search' />
-                    {/* <a style={{ color: 'white', fontSize: 15, marginLeft: 40, marginRight: 5 }}>Gio hang</a> */}
-                    <img src={require('../../assets/images/ic_cart.png')} className='img-cart' />
+            <div className='col-sm-12 col-md-6 col-lg-6 row' style={{ display: 'flex', alignItems: 'center' }}>
+                <div className='col-sm-6 '>
+                    <img src={require('../../assets/images/ic_shop.png')} className='img-shop' />
                 </div>
+                <a href='/cart' style={{ textDecoration: 'none' }}  className='col-sm-6'>
+                    <div style={{ justifyItems: 'end', display: 'flex', alignItems: 'center' }} >
+                        <input placeholder='tim kiem san pham' className='input-search' />
+                        {/* <a style={{ color: 'white', fontSize: 15, marginLeft: 40, marginRight: 5 }}>Gio hang</a> */}
+                        <img src={require('../../assets/images/ic_cart.png')} className='img-cart' />
+                    </div>
+                </a>
 
             </div>
-            <div className='col-sm-12 col-md-6 col-lg-6' style={{ justifyContent: 'end',display:'flex' }} >
-                <a href='/' style={{textDecoration:'none'}}>
+            <div className='col-sm-12 col-md-6 col-lg-6' style={{ justifyContent: 'end', display: 'flex' }} >
+                <a href='/' style={{ textDecoration: 'none' }}>
                     <div className='btn-logout'>
                         <FaSignOutAlt className='icon-logout' size={24} color="white" />
                         <span className='text-logout'>Logout</span>

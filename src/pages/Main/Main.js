@@ -111,8 +111,8 @@ const Main = () => {
             <p>Email: {email}</p>
             <p>Password: {password}</p> */}
             <div className="container">
-            <CustomMenu />
-            <ItemCategory category={category} />
+            {/* <CustomMenu />
+            <ItemCategory category={category} /> */}
             <div className="row">
                 <img src="//cdnv2.tgdd.vn/mwg-static/tgdd/Banner/25/bf/25bfac032daaa77fe6ef17a1e48876cb.png" />
             </div>
@@ -126,7 +126,7 @@ const Main = () => {
             }
             </div>
        
-            <div style={{height:50,backgroundColor:'#ffd500',marginTop:10}}/>
+            {/* <div style={{height:50,backgroundColor:'#ffd500',marginTop:10}}/>
             <div className="Footer">
                 <div className="row">
                     <div className="col-lg-3">
@@ -155,7 +155,7 @@ const Main = () => {
                     </div>
                 </div>
 
-            </div>
+            </div> */}
         </div>
     )
 }
