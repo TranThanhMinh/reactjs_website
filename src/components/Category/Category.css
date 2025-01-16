@@ -31,8 +31,7 @@
     display: block;
     background-color: #777;
     position: absolute;
-    padding: 10px;
-    margin-top: 10px;
+    
 
 }
 
@@ -47,5 +46,12 @@ Hiển thị submenu khi hover vào menu-item
     list-style: none;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    
+}
+
+.submenu-item{
+      padding: 10px;
 }
 

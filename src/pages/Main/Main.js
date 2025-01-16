@@ -1,9 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, useParams } from 'react-router-dom';
-import CustomMenu from "../../components/CustomMenu/CustomMenu";
-import Home from "../Home/Home";
 import './Main.css'
-import ItemCategory from "../../components/Category/Category";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { useNavigate } from "react-router-dom";

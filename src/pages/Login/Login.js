@@ -13,7 +13,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
    // navigate(`/home/${email}/${password}`); // Navigate with URL parameters
-    navigate(`/main/${email}/${password}`); // Navigate with URL parameters
+    navigate(`/main`); // Navigate with URL parameters
   };
 
 

@@ -10,15 +10,15 @@ const ItemCategory = ({ category }) => {
                     {
                         category.map((item) => (
                             <li className="menu-item"> <a href="#">{item.name}</a>
-                            {
-                                item.submenu.map((sub)=>(
-                                    <ul className="submenu">
-                                        <li>
-                                            <a href="#">{sub.itemsub}</a>
-                                        </li>
-                                    </ul>
-                                ))
-                            }
+                                <ul className="submenu">
+                                    {
+                                        item.submenu.map((sub) => (
+                                            <li className="submenu-item">
+                                                <a href="#">{sub.itemsub}</a>
+                                            </li>
+                                        ))
+                                    }
+                                </ul>
                             </li>
                         ))
                     }

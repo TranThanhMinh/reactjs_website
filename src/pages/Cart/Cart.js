@@ -1,9 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, useParams } from 'react-router-dom';
-import CustomMenu from "../../components/CustomMenu/CustomMenu";
-import Home from "../Home/Home";
 import './Cart.css'
-import ItemCategory from "../../components/Category/Category";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { useNavigate } from "react-router-dom";
@@ -12,6 +9,9 @@ const Cart = () => {
     const location = useLocation(); // Get the passed state
     const { id, message } = location.state || {}; // Destructure data from state
     const { email, password } = useParams(); // Get data from URL parameters
+    const [sum, SetSum] = useState(0)
+    const [select, setSelect] = useState([])
+    const [selects, setSelects] = useState(false)
 
     const navigate = useNavigate()
 
@@ -33,90 +33,110 @@ const Cart = () => {
     const product = [
         {
             'name': 'HONOR Pad X9 WiFi 4GB/128GB',
-            'price': '3.890.000',
+            'price': 3890000,
             'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
         },
         {
             'name': 'HONOR Pad X9 WiFi 4GB/128GB',
-            'price': '3.890.000',
+            'price': 3890000,
             'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
         }, {
             'name': 'HONOR Pad X9 WiFi 4GB/128GB',
-            'price': '3.890.000',
+            'price': 3890000,
             'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
         }, {
             'name': 'HONOR Pad X9 WiFi 4GB/128GB',
-            'price': '3.890.000',
+            'price': 3890000,
             'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
         }, {
             'name': 'HONOR Pad X9 WiFi 4GB/128GB',
-            'price': '3.890.000',
+            'price': 3890000,
             'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
         }, {
             'name': 'HONOR Pad X9 WiFi 4GB/128GB',
-            'price': '3.890.000',
+            'price': 3890000,
             'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
         }, {
             'name': 'HONOR Pad X9 WiFi 4GB/128GB',
-            'price': '3.890.000',
+            'price': 3890000,
             'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
         }, {
             'name': 'HONOR Pad X9 WiFi 4GB/128GB',
-            'price': '3.890.000',
+            'price': 3890000,
             'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
         }, {
             'name': 'HONOR Pad X9 WiFi 4GB/128GB',
-            'price': '3.890.000',
+            'price': 3890000,
             'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
         }, {
             'name': 'HONOR Pad X9 WiFi 4GB/128GB',
-            'price': '3.890.000',
+            'price': 3890000,
+            'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
+        }, {
+            'name': 'HONOR Pad X9 WiFi 4GB/128GB',
+            'price': 3890000,
+            'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
+        }, {
+            'name': 'HONOR Pad X9 WiFi 4GB/128GB',
+            'price': 3890000,
+            'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
+        }, {
+            'name': 'HONOR Pad X9 WiFi 4GB/128GB',
+            'price': 3890000,
+            'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
+        }, {
+            'name': 'HONOR Pad X9 WiFi 4GB/128GB',
+            'price': 3890000,
+            'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
+        }, {
+            'name': 'HONOR Pad X9 WiFi 4GB/128GB',
+            'price': 3890000,
+            'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
+        }, {
+            'name': 'HONOR Pad X9 WiFi 4GB/128GB',
+            'price': 3890000,
             'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
         },
 
     ]
 
+    useEffect(() => {
+        let price = 0
+
+        product.map((item, index) => (
+            price = select.includes(index) ? price + item.price : price
+        ))
+        SetSum(price)
+
+        console.log('select', select)
+    }, [select])
+
+    const onSelect = (bool, index) => {
+        if (bool) {
+            setSelect([...select, index])
+        } else {
+            setSelect(select.filter(_filter => _filter != index))
+        }
+
+    }
+
     const detailProduct = () => {
         navigate('/')
     }
 
-
-    const showCart = () => {
-        return (
-            <div style={{ backgroundColor: 'red' }}>
-                {
-                    product.map((item, index) => (
-                        <div className="row item-cart">
-                            <div className="col-lg-6" style={{ display: 'flex', alignItems: 'center' }}>
-                                <span >{item.name}</span>
-                            </div>
-                            <div className="col-lg-6 row text-center" >
-                                <span className="col-lg-3">{item.price}</span>
-                                <div style={{ alignItems: 'center' }} className="col-lg-3 ">
-                                    <input className="input-number" onChange={(number) => number} type="number" />
-                                </div>
-                                <span className="col-lg-3">{item.price * 2}</span>
-                                <span className="col-lg-3">Xoa</span>
-                            </div>
-                        </div>
-
-                    ))
-                }
-            </div>
-        )
-    }
-
+    const formatMoney = (number) => {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + 'đ';
+    };
 
     const listProduct = () => {
+
         return (
             <div>
                 <div className="row">
-
-
                     <div className="row">
-
                         <div className="col-md-6" >
                             <div className="item-cart" >
+
                                 <b>San pham</b>
                             </div>
                         </div>
@@ -132,40 +152,74 @@ const Cart = () => {
 
 
                 </div>
-                <div className="row">
+                <div>
                     {
-                        product.map((item) => (
-                            <div className="row">
+                        product.map((item, index) => {
+                            const isCheck = select.includes(index)
 
-                                <div className="col-md-6" >
-                                    <div className="item-cart" style={{ display: 'flex', alignItems:'center' }} >
-                                        <img src={item.image} style={{ width: 40, height: 40, marginRight: 10 }} />
-                                        <span >{item.name} </span>
-                                    </div>
-                                </div>
-                                <div className="col-md-6" >
-                                    <div className="item-cart row" >
-                                        <span className="col-lg-3">{item.price}</span>
-                                        <div style={{ alignItems: 'center' }} className="col-lg-3 ">
-                                            <input className="input-number" value='1' onChange={(number) => number} type="text" style={{justifyItems:'center'}} />
+                            return (
+                                <div className="row" style={{ backgroundColor: index % 2 == 0 ? '#DDDDDD' : 'white' }}>
+                                    <div className="col-md-6" >
+                                        <div className="item-cart" style={{ display: 'flex', alignItems: 'center' }} >
+                                            <input className="checkbox" type="checkbox" checked={isCheck} onChange={(event) => onSelect(!isCheck, index)} />
+                                            <img src={item.image} style={{ width: 40, height: 40, marginRight: 10 }} />
+                                            <span >{item.name} </span>
                                         </div>
-                                        <span className="col-lg-3">{item.price * 2}</span>
-                                        <span className="col-lg-3">Xoa</span>
+                                    </div>
+                                    <div className="col-md-6" >
+                                        <div className="item-cart row" >
+                                            <span className="col-lg-3">{formatMoney(item.price)}</span>
+                                            <div style={{ alignItems: 'center' }} className="col-lg-3 ">
+                                                <input className="input-number" value='1' onChange={(number) => number} type="text" style={{ justifyItems: 'center' }} />
+                                            </div>
+                                            <span className="col-lg-3">{formatMoney(item.price)}</span>
+                                            <a href="#" className="col-lg-3">
+                                                <p>Xoa</p>
+                                            </a>
+
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))
+                            )
+
+                        })
                     }
                 </div>
             </div>
         )
     }
 
+    // useEffect(() => {
+    //     let price = 0
+    //     setSelect([])
+    //     if (selects) {
+    //         product.map((item, index) => (
+    //             price = price + item.price
+    //         ))
+    //     }
+    //     SetSum(price)
+    //     console.log('selectAll', price)
+    // }, [selects])
+
+    const selectAll = (bool) => {
+        let price = 0
+        let select = []
+        if (bool) {
+            product.map((item, index) => {
+                price = price + item.price
+                select.push(index)
+            })
+
+        }
+        setSelect([...select])
+        SetSum(price)
+
+    }
 
     return (
         <div>
-
             <div style={{ marginLeft: '15%', marginRight: '15%' }}>
+
                 <div className="title">
                     <img src={require('../../assets/images/ic_promotion.png')} className="img-icon" />
                     <h2>Gio hang</h2>
@@ -173,9 +227,21 @@ const Cart = () => {
                 {
                     listProduct()
                 }
+                <div className="payment">
+                    <div className="row" >
+                        <div className="col-md-6" style={{ display: 'flex', alignItems: 'center', backgroundColor: '#99FF66', padding: 20 }}>
+                            <input className="checkbox" type="checkbox" onChange={(event) => { selectAll(event.target.checked) }} />
+                            <label style={{ fontSize: 22, textAlign: 'center' }}> Chon tất cả {select.length} sản phẩm</label>
+                        </div>
+                        <div className="col-md-6" style={{ display: 'flex', alignItems: 'center', backgroundColor: '#99FF66', padding: 20 }}>
+                            <label className="col-md-8" style={{ fontSize: 22, display: 'flex', alignContent: 'center' }}>Tổng thanh toán:
+                                <p style={{ color: 'red', fontWeight: 'bold', marginLeft: 5 }}>{formatMoney(sum)}</p>
+                            </label>
+                            <button className="col-md-4" style={{ backgroundColor: 'yellow', borderRadius: 10 }}>Mua hàng</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-
         </div>
     )
 }

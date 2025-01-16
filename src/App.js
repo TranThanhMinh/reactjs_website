@@ -22,7 +22,16 @@ function App() {
       'name': "Điện thoại",
       'submenu':[
         {
-        'itemsub':'Sam sung'
+        'itemsub':'Sam sung1',
+        'url':'#'
+       },
+       {
+        'itemsub':'Sam sung2',
+        'url':'#'
+       },
+       {
+        'itemsub':'Sam sung3',
+        'url':'#'
        }
       ]
     },
@@ -31,7 +40,16 @@ function App() {
       'name': "Laptop",
       'submenu':[
         {
-        'itemsub':'Sam sung'
+        'itemsub':'Sam sung',
+        'url':'#'
+       },
+       {
+        'itemsub':'Sam sung',
+        'url':'#'
+       },
+       {
+        'itemsub':'Sam sung',
+        'url':'#'
        }
       ]
     },
@@ -40,7 +58,16 @@ function App() {
       'name': "Ipad",
       'submenu':[
         {
-        'itemsub':'Sam sung'
+        'itemsub':'Sam sung',
+        'url':'#'
+       },
+       {
+        'itemsub':'Sam sung',
+        'url':'#'
+       },
+       {
+        'itemsub':'Sam sung',
+        'url':'#'
        }
       ]
     },
@@ -56,7 +83,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/main/:email/:password" element={<Main />} />
+        <Route path="/main" element={<Main />} />
+        {/* <Route path="/main/:email/:password" element={<Main />} /> */}
         <Route path="/cart" element={<Cart />} />
       </Routes>
 
