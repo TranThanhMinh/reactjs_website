@@ -12,15 +12,40 @@
 .menu-item {
     /* margin-right: 10px; */
     padding: 10px;
+   
 }
 
 .menu-item a {
     text-decoration: none;
     color: white;
+    display: block;
 }
 
 .menu-item a:hover {
     color: rgb(231, 143, 143);
-    padding-top: 10px;
-    padding-bottom: 10px;
+
 }
+
+
+.menu-item:hover .submenu{
+    display: block;
+    background-color: #777;
+    position: absolute;
+    padding: 10px;
+    margin-top: 10px;
+
+}
+
+Hiển thị submenu khi hover vào menu-item
+.menu-item:hover .submenu {
+    display: block;
+  }
+
+.submenu{
+    display: none;
+    text-decoration: none;
+    list-style: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+

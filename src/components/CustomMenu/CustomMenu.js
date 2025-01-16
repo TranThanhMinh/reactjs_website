@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import './CustomMenu.css'; // Optional for styling
 import { FaSignOutAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 const CustomMenu = () => {
     const navigate = useNavigate()
 

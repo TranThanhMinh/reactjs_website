@@ -9,7 +9,17 @@ const ItemCategory = ({ category }) => {
                 <ul className="menu-list">
                     {
                         category.map((item) => (
-                            <li className="menu-item"> <a href="#">{item.name}</a></li>
+                            <li className="menu-item"> <a href="#">{item.name}</a>
+                            {
+                                item.submenu.map((sub)=>(
+                                    <ul className="submenu">
+                                        <li>
+                                            <a href="#">{sub.itemsub}</a>
+                                        </li>
+                                    </ul>
+                                ))
+                            }
+                            </li>
                         ))
                     }
                 </ul>
