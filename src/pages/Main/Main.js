@@ -80,6 +80,32 @@ const Main = () => {
         navigate('/')
     }
 
+    
+    const showCart = () => {
+        return (
+            <div style={{backgroundColor:'red'}}>
+                {
+                    product.map((itme, index) => (
+                        <div className="row item-cart">
+                            <div className="col-lg-6" style={{ display: 'flex', alignItems: 'center' }}>
+                                <span >{itme.name}</span>
+                            </div>
+                            <div className="col-lg-6 row text-center" >
+                                <span className="col-lg-3">{itme.price}</span>
+                                <div style={{ alignItems: 'center' }} className="col-lg-3 ">
+                                    <input className="input-number" onChange={(number) => number} type="number" />
+                                </div>
+                                <span className="col-lg-3">{itme.price * 2}</span>
+                                <span className="col-lg-3">Xoa</span>
+                            </div>
+                        </div>
+
+                    ))
+                }
+            </div>
+        )
+    }
+
 
     const listProduct = () => {
         return (
@@ -110,22 +136,22 @@ const Main = () => {
             {/* <h1>Details Page</h1>
             <p>Email: {email}</p>
             <p>Password: {password}</p> */}
-            <div className="container">
-            {/* <CustomMenu />
+            <div style={{ marginLeft: '15%', marginRight: '15%' }}>
+                {/* <CustomMenu />
             <ItemCategory category={category} /> */}
-            <div className="row">
-                <img src="//cdnv2.tgdd.vn/mwg-static/tgdd/Banner/25/bf/25bfac032daaa77fe6ef17a1e48876cb.png" />
+                <div className="row">
+                    <img src="//cdnv2.tgdd.vn/mwg-static/tgdd/Banner/25/bf/25bfac032daaa77fe6ef17a1e48876cb.png" />
+                </div>
+
+                <div className="title">
+                    <img src={require('../../assets/images/ic_promotion.png')} className="img-icon" />
+                    <h2>Khuyến mãi Online</h2>
+                </div>
+                {
+                    listProduct()
+                }
             </div>
 
-            <div className="title">
-                <img src={require('../../assets/images/ic_promotion.png')} className="img-icon" />
-                <h2>Khuyến mãi Online</h2>
-            </div>
-            {
-                listProduct()
-            }
-            </div>
-       
             {/* <div style={{height:50,backgroundColor:'#ffd500',marginTop:10}}/>
             <div className="Footer">
                 <div className="row">
