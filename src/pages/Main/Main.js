@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, useParams } from 'react-router-dom';
 import './Main.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { fetchUsers } from "../../redux/slices/apiSlice";
 
 const Main = () => {
     const location = useLocation(); // Get the passed state
     const { id, message } = location.state || {}; // Destructure data from state
     const { email, password } = useParams(); // Get data from URL parameters
-
+    const [product, setProduct] = useState([]); // Get data from URL parameters
+    const dispatch = useDispatch();
+    const { data, loading, error } = useSelector((state) => state.user);
     const navigate = useNavigate()
 
     const category = [
@@ -27,60 +30,69 @@ const Main = () => {
         },
     ]
 
-    const product = [
-        {
-            'name': 'HONOR Pad X9 WiFi 4GB/128GB',
-            'price': '3.890.000',
-            'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
-        },
-        {
-            'name': 'HONOR Pad X9 WiFi 4GB/128GB',
-            'price': '3.890.000',
-            'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
-        }, {
-            'name': 'HONOR Pad X9 WiFi 4GB/128GB',
-            'price': '3.890.000',
-            'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
-        }, {
-            'name': 'HONOR Pad X9 WiFi 4GB/128GB',
-            'price': '3.890.000',
-            'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
-        }, {
-            'name': 'HONOR Pad X9 WiFi 4GB/128GB',
-            'price': '3.890.000',
-            'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
-        }, {
-            'name': 'HONOR Pad X9 WiFi 4GB/128GB',
-            'price': '3.890.000',
-            'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
-        }, {
-            'name': 'HONOR Pad X9 WiFi 4GB/128GB',
-            'price': '3.890.000',
-            'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
-        }, {
-            'name': 'HONOR Pad X9 WiFi 4GB/128GB',
-            'price': '3.890.000',
-            'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
-        }, {
-            'name': 'HONOR Pad X9 WiFi 4GB/128GB',
-            'price': '3.890.000',
-            'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
-        }, {
-            'name': 'HONOR Pad X9 WiFi 4GB/128GB',
-            'price': '3.890.000',
-            'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
-        },
+    // const product = [
+    //     {
+    //         'name': 'HONOR Pad X9 WiFi 4GB/128GB',
+    //         'price': '3.890.000',
+    //         'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
+    //     },
+    //     {
+    //         'name': 'HONOR Pad X9 WiFi 4GB/128GB',
+    //         'price': '3.890.000',
+    //         'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
+    //     }, {
+    //         'name': 'HONOR Pad X9 WiFi 4GB/128GB',
+    //         'price': '3.890.000',
+    //         'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
+    //     }, {
+    //         'name': 'HONOR Pad X9 WiFi 4GB/128GB',
+    //         'price': '3.890.000',
+    //         'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
+    //     }, {
+    //         'name': 'HONOR Pad X9 WiFi 4GB/128GB',
+    //         'price': '3.890.000',
+    //         'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
+    //     }, {
+    //         'name': 'HONOR Pad X9 WiFi 4GB/128GB',
+    //         'price': '3.890.000',
+    //         'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
+    //     }, {
+    //         'name': 'HONOR Pad X9 WiFi 4GB/128GB',
+    //         'price': '3.890.000',
+    //         'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
+    //     }, {
+    //         'name': 'HONOR Pad X9 WiFi 4GB/128GB',
+    //         'price': '3.890.000',
+    //         'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
+    //     }, {
+    //         'name': 'HONOR Pad X9 WiFi 4GB/128GB',
+    //         'price': '3.890.000',
+    //         'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
+    //     }, {
+    //         'name': 'HONOR Pad X9 WiFi 4GB/128GB',
+    //         'price': '3.890.000',
+    //         'image': 'https://cdn.tgdd.vn/Products/Images/522/318353/honor-pad-x9-thumb-1-600x600.jpg'
+    //     },
 
-    ]
+    // ]
+
+
+    useEffect(() => {
+        dispatch(fetchUsers());
+    }, [dispatch]);
+
+    useEffect(() => {
+        setProduct(data)
+    }, [data]);
 
     const detailProduct = () => {
         navigate('/')
     }
 
-    
+
     const showCart = () => {
         return (
-            <div style={{backgroundColor:'red'}}>
+            <div style={{ backgroundColor: 'red' }}>
                 {
                     product.map((itme, index) => (
                         <div className="row item-cart">
@@ -113,7 +125,7 @@ const Main = () => {
                             <div className="product" >
                                 <a href="/">
                                     <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                        <img src={item.image} className="img-product" />
+                                        <img src={item.imags} className="img-product" />
                                     </div>
 
                                     <h5>{item.name}</h5>

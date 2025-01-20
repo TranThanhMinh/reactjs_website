@@ -8,6 +8,9 @@ import Cart from './pages/Cart/Cart';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CustomMenu from "../src/components/CustomMenu/CustomMenu";
 import ItemCategory from "../src/components/Category/Category";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+
 
 function App() {
   const menuItems = [
@@ -20,106 +23,108 @@ function App() {
     {
       'id': 1,
       'name': "Điện thoại",
-      'submenu':[
+      'submenu': [
         {
-        'itemsub':'Sam sung1',
-        'url':'#'
-       },
-       {
-        'itemsub':'Sam sung2',
-        'url':'#'
-       },
-       {
-        'itemsub':'Sam sung3',
-        'url':'#'
-       }
+          'itemsub': 'Sam sung1',
+          'url': '#'
+        },
+        {
+          'itemsub': 'Sam sung2',
+          'url': '#'
+        },
+        {
+          'itemsub': 'Sam sung3',
+          'url': '#'
+        }
       ]
     },
     {
       'id': 2,
       'name': "Laptop",
-      'submenu':[
+      'submenu': [
         {
-        'itemsub':'Sam sung',
-        'url':'#'
-       },
-       {
-        'itemsub':'Sam sung',
-        'url':'#'
-       },
-       {
-        'itemsub':'Sam sung',
-        'url':'#'
-       }
+          'itemsub': 'Sam sung',
+          'url': '#'
+        },
+        {
+          'itemsub': 'Sam sung',
+          'url': '#'
+        },
+        {
+          'itemsub': 'Sam sung',
+          'url': '#'
+        }
       ]
     },
     {
       'id': 3,
       'name': "Ipad",
-      'submenu':[
+      'submenu': [
         {
-        'itemsub':'Sam sung',
-        'url':'#'
-       },
-       {
-        'itemsub':'Sam sung',
-        'url':'#'
-       },
-       {
-        'itemsub':'Sam sung',
-        'url':'#'
-       }
+          'itemsub': 'Sam sung',
+          'url': '#'
+        },
+        {
+          'itemsub': 'Sam sung',
+          'url': '#'
+        },
+        {
+          'itemsub': 'Sam sung',
+          'url': '#'
+        }
       ]
     },
   ]
 
   return (
-    <Router>
-      {/* <Navigation /> */}
-      <div style={{marginLeft:'15%',marginRight:'15%'}}>
-        <CustomMenu />
-        <ItemCategory category={category} />
-      </div>
+    <Provider store={store}>
+      <Router>
+        {/* <Navigation /> */}
+        <div style={{ marginLeft: '15%', marginRight: '15%' }}>
+          <CustomMenu />
+          <ItemCategory category={category} />
+        </div>
 
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/main" element={<Main />} />
-        {/* <Route path="/main/:email/:password" element={<Main />} /> */}
-        <Route path="/cart" element={<Cart />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/main" element={<Main />} />
+          {/* <Route path="/main/:email/:password" element={<Main />} /> */}
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
 
-      <div style={{ height: 50, backgroundColor: '#ffd500', marginTop: 10 }} />
-      <div className="Footer">
-        <div className="row">
-          <div className="col-lg-3">
-            <h5>Toong dai ho tro</h5>
-            <div>
-              <span>Goi mua</span>
-              <span className="phone-number">012343242</span>
+        <div style={{ height: 50, backgroundColor: '#ffd500', marginTop: 10 }} />
+        <div className="Footer">
+          <div className="row">
+            <div className="col-lg-3">
+              <h5>Toong dai ho tro</h5>
+              <div>
+                <span>Goi mua</span>
+                <span className="phone-number">012343242</span>
+              </div>
+              <div>
+                <span>Khieu nai</span>
+                <span className="phone-number">012343242</span>
+              </div>
+              <div>
+                <span>Bao hanh</span>
+                <span className="phone-number">012343242</span>
+              </div>
             </div>
-            <div>
-              <span>Khieu nai</span>
-              <span className="phone-number">012343242</span>
+            <div className="col-lg-3">
+              <h5>Toong dai ho tro</h5>
             </div>
-            <div>
-              <span>Bao hanh</span>
-              <span className="phone-number">012343242</span>
+            <div className="col-lg-3">
+              <h5>Toong dai ho tro</h5>
             </div>
-          </div>
-          <div className="col-lg-3">
-            <h5>Toong dai ho tro</h5>
-          </div>
-          <div className="col-lg-3">
-            <h5>Toong dai ho tro</h5>
-          </div>
-          <div className="col-lg-3">
-            <h5>Toong dai ho tro</h5>
+            <div className="col-lg-3">
+              <h5>Toong dai ho tro</h5>
+            </div>
           </div>
         </div>
-      </div>
-    </Router>
 
+      </Router>
 
+    </Provider>
   );
 }
 

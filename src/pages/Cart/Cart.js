@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, useParams } from 'react-router-dom';
 import './Cart.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { fetchCart } from "../../redux/slices/apiSlice";
 
 const Cart = () => {
     const location = useLocation(); // Get the passed state
@@ -11,8 +12,10 @@ const Cart = () => {
     const { email, password } = useParams(); // Get data from URL parameters
     const [sum, SetSum] = useState(0)
     const [select, setSelect] = useState([])
+    const [cart, setCart] = useState([])
     const [selects, setSelects] = useState(false)
-
+    const dispatch = useDispatch();
+    const { data, loading, error } = useSelector((state) => state.user);
     const navigate = useNavigate()
 
     const category = [
@@ -101,10 +104,18 @@ const Cart = () => {
     ]
 
     useEffect(() => {
+        dispatch(fetchCart())
+    }, [])
+
+    useEffect(() => {
+        setCart(data)
+    }, [data]);
+
+    useEffect(() => {
         let price = 0
 
-        product.map((item, index) => (
-            price = select.includes(index) ? price + item.price : price
+        cart.map((item, index) => (
+            price = select.includes(index) ? price + ( item.price * item.number_product): price
         ))
         SetSum(price)
 
@@ -136,7 +147,6 @@ const Cart = () => {
                     <div className="row">
                         <div className="col-md-6" >
                             <div className="item-cart" >
-
                                 <b>San pham</b>
                             </div>
                         </div>
@@ -149,12 +159,10 @@ const Cart = () => {
                             </div>
                         </div>
                     </div>
-
-
                 </div>
                 <div>
                     {
-                        product.map((item, index) => {
+                        cart.map((item, index) => {
                             const isCheck = select.includes(index)
 
                             return (
@@ -162,7 +170,7 @@ const Cart = () => {
                                     <div className="col-md-6" >
                                         <div className="item-cart" style={{ display: 'flex', alignItems: 'center' }} >
                                             <input className="checkbox" type="checkbox" checked={isCheck} onChange={(event) => onSelect(!isCheck, index)} />
-                                            <img src={item.image} style={{ width: 40, height: 40, marginRight: 10 }} />
+                                            <img src={item.imags} style={{ width: 40, height: 40, marginRight: 10 }} />
                                             <span >{item.name} </span>
                                         </div>
                                     </div>
@@ -172,7 +180,7 @@ const Cart = () => {
                                             <div style={{ alignItems: 'center' }} className="col-lg-3 ">
                                                 <input className="input-number" value='1' onChange={(number) => number} type="text" style={{ justifyItems: 'center' }} />
                                             </div>
-                                            <span className="col-lg-3">{formatMoney(item.price)}</span>
+                                            <span className="col-lg-3">{formatMoney(item.price*item.number_product)}</span>
                                             <a href="#" className="col-lg-3">
                                                 <p>Xoa</p>
                                             </a>
@@ -189,23 +197,11 @@ const Cart = () => {
         )
     }
 
-    // useEffect(() => {
-    //     let price = 0
-    //     setSelect([])
-    //     if (selects) {
-    //         product.map((item, index) => (
-    //             price = price + item.price
-    //         ))
-    //     }
-    //     SetSum(price)
-    //     console.log('selectAll', price)
-    // }, [selects])
-
     const selectAll = (bool) => {
         let price = 0
         let select = []
         if (bool) {
-            product.map((item, index) => {
+            cart.map((item, index) => {
                 price = price + item.price
                 select.push(index)
             })
@@ -233,10 +229,11 @@ const Cart = () => {
                             <input className="checkbox" type="checkbox" onChange={(event) => { selectAll(event.target.checked) }} />
                             <label style={{ fontSize: 22, textAlign: 'center' }}> Chon tất cả {select.length} sản phẩm</label>
                         </div>
-                        <div className="col-md-6" style={{ display: 'flex', alignItems: 'center', backgroundColor: '#99FF66', padding: 20 }}>
-                            <label className="col-md-8" style={{ fontSize: 22, display: 'flex', alignContent: 'center' }}>Tổng thanh toán:
-                                <p style={{ color: 'red', fontWeight: 'bold', marginLeft: 5 }}>{formatMoney(sum)}</p>
-                            </label>
+                        <div className="col-md-6" style={{ display: 'flex', justifyItems: 'center', backgroundColor: '#99FF66', padding: 20 }}>
+                            <div className="col-md-8" style={{ display: 'flex', alignItems: 'center' }}>
+                                <label style={{ fontSize: 22 }}>Tổng thanh toán:  </label>
+                                <label style={{ color: 'red', fontWeight: 'bold', marginLeft: 5, fontSize: 24, }}>{formatMoney(sum)}</label>
+                            </div>
                             <button className="col-md-4" style={{ backgroundColor: 'yellow', borderRadius: 10 }}>Mua hàng</button>
                         </div>
                     </div>
